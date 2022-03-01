@@ -1,26 +1,109 @@
 <!DOCTYPE html>
 <html>
 <body>
-	<div class="col-12 col-lg-6 text-center text-md-left position-relative">
-            <div class="home-globe-container home-globe-container-webgl">
-  <div class="mx-auto width-full mt-n9 mt-lg-2 home-globe position-relative height-full js-webgl-globe">
-    <video width="916" height="918" loop="" muted="" playsinline="" preload="none" class="home-globe-container-video js-globe-fallback-video " hidden="">
-      <source type="video/mp4; codecs=hevc,mp4a.40.2" src="https://github.githubassets.com/images/modules/site/home/globe-900.hevc.mp4">
-      <source type="video/mp4; codecs=avc1.4D401E,mp4a.40.2" src="https://github.githubassets.com/images/modules/site/home/globe-900.h264.mp4">
-    </video>
-    <video loop="" muted="" playsinline="" preload="none" class="home-globe-container-video js-globe-fallback-video-small" hidden="">
-      <source type="video/mp4; codecs=hevc,mp4a.40.2" src="https://github.githubassets.com/images/modules/site/home/globe-500.hevc.mp4">
-      <source type="video/mp4; codecs=avc1.4D401E,mp4a.40.2" src="https://github.githubassets.com/images/modules/site/home/globe-500.h264.mp4">
-    </video>
-    <img srcset="https://github.githubassets.com/images/modules/site/home/globe-700.jpg 700w,
-              https://github.githubassets.com/images/modules/site/home/globe.jpg 1400w" sizes="(max-width: 700px) 70vw, 700px" src="https://github.githubassets.com/images/modules/site/home/globe.jpg" alt="Planet earth with visualization of GitHub activity crossing the globe" class="width-full height-auto js-globe-fallback-image" loading="lazy" decoding="async" width="1238" height="1404" hidden="">
+	<style>
+       .wrap {
+            display: flex;
+            background-image: url('./bg2.jpg');
+            background-size: cover;
+            width: 500px;
+            height: 500px;
+            align-items: center;
+            justify-content: center;
+        }
 
-    
+        .planet {
+            position: absolute;
+            border: 2px solid #13c2c2;
+            width: 300px;
+            height: 300px;
+            transform-style: preserve-3d;
+            transform: scaleY(0.5) rotateZ(30deg);
+            border-radius: 50%;
+           
+        }
 
-  <canvas width="2178" height="900" class="webgl-canvas js-globe-canvas" style="display: block; width: 2178px; height: 900px;"></canvas></div>
-</div>
+        .ball {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(20, 12, 33, .5);
+            left: calc(50% - 25px);
+            top: -25px;
+            text-align: center;
+            line-height: 50px;
+            color: #13c2c2;
+            transform: rotateZ(-30deg) scaleY(2);
+        }
+        .second {
+            left: calc(50% + 125px);
+            top: 125px;
+        }
+        .third {
+            left: calc(50% - 25px);
+            top: 275px;
+        }
+        .four {
+            left: calc(50% - 175px);
+            top: 125px;
+        }
+        
+        /* // 公转动画 */
+        @keyframes planet-rotate {
+        0% {
+            transform:  rotate(30deg) scaleY(0.5) rotate(0);
+        }
+        100% {
+            transform:  rotate(30deg) scaleY(0.5) rotate(360deg);
+        }
+        }
 
+        /* // 自转动画 */
+        @keyframes self-rotate {
+        0% {
+            transform: rotate(0) scaleY(2) rotate(-30deg);
+        }
+        100% {
+            transform: rotate(-360deg) scaleY(2) rotate(-30deg);
+        }
+        }
+
+        .planet {
+            animation: planet-rotate 16s linear infinite;
+        }
+
+        .ball {
+            animation: self-rotate 16s linear infinite;
+        } 
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class='wrap'>
+            <div class='planet'>
+                <div class='ball'>ball1</div>
+                <div class='ball second'>ball2</div>
+                <div class='ball third'>ball3</div>
+                <div class='ball four'>ball4</div>
+            </div>
         </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data() {
+              return {
+                  
+              }
+            },
+            methods: {
+                
+            },
+        })
+    </script>
+</body>
+
 
 </body>
 </html>
